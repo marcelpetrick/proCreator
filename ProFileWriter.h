@@ -17,4 +17,7 @@ private:
     //! The content is added then based on the number of items.
     //! Special cases are the empty list. Also care for the last item, so that it gets no newline-backslash.
     void writeSection(QString const sectionName, QStringList items);
+
+    //! Used to create the header of the pro-file.
+    void writeHeader(QString const targetName);
 };

@@ -14,5 +14,5 @@ int main(int argc, char *argv[])
     ProFileWriter writer;
     writer.writeEverything();
 
-    qDebug() << "end of program";
+    //qDebug() << "end of program";
 }
