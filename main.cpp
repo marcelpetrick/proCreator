@@ -11,11 +11,8 @@ int main(int argc, char *argv[])
 
 //    return a.exec();
 
-    QStringList exampleList;
-    exampleList << "file0" << "file1" << "file2";
-    QString sectioName("HEADERS");
     ProFileWriter writer;
-    writer.writeSection(sectioName, exampleList);
+    writer.writeEverything();
 
     qDebug() << "end of program";
 }

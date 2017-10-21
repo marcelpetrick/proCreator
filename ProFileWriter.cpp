@@ -6,6 +6,51 @@ ProFileWriter::ProFileWriter()
     qDebug() << "ctor ProFileWriter()"; //todom remove
 }
 
+//###############################################
+
+void ProFileWriter::writeEverything(const QString targetName)
+{
+    qDebug() << "ProFileWriter::writeEverything: targetName=" << targetName; //todom remove
+
+    // TODO some prefix for the file
+
+
+    //SOURCES
+    {
+        QStringList exampleList;
+        exampleList << "file0.cpp"; // << "file1.h" << "file2";
+        QString sectioName("SOURCES");
+        writeSection(sectioName, exampleList);
+    }
+
+    //HEADERS
+    {
+        QStringList exampleList;
+        exampleList << "file0.h" << "file1.h" << "file2";
+        QString sectioName("HEADERS");
+        writeSection(sectioName, exampleList);
+    }
+
+    //FORMS
+    {
+        QStringList exampleList;
+        //exampleList << "file0" << "file1" << "file2";
+        QString sectioName("FORMS");
+        writeSection(sectioName, exampleList);
+    }
+
+    //RESOURCES
+    {
+        QStringList exampleList;
+        //exampleList << "file0" << "file1" << "file2";
+        QString sectioName("RESOURCES");
+        writeSection(sectioName, exampleList);
+    }
+}
+
+//###############################################
+
+
 void ProFileWriter::writeSection(const QString sectionName, QStringList items)
 {
     qDebug() << "ProFileWriter::writeSection: sectionName=" << sectionName << " | items=" << items; //todom remove
@@ -23,7 +68,7 @@ void ProFileWriter::writeSection(const QString sectionName, QStringList items)
     // see 0.
     if(items.isEmpty())
     {
-        qDebug() << "\t" << "empty list - early return";
+        //qDebug() << "\t" << "empty list - early return";
         return;
     }
 
@@ -39,6 +84,6 @@ void ProFileWriter::writeSection(const QString sectionName, QStringList items)
     // see 2.: simple version, just remove the last two characters ... instead of doing some special handling for the last item of the list ..
     output = output.left(output.length() - 2);
 
-    qDebug() << "resut:";
+    //qDebug() << "result:";
     qDebug().noquote() << output;
 }
