@@ -42,15 +42,10 @@ CMakeLists.txt.user*
 # ----------------------------------------------------------------------------
 
 *~
-*.autosave
-*.a
 *.core
-*.moc
-*.o
 *.obj
 *.orig
 *.rej
-*.so
 *.so.*
 *_pch.h.cpp
 *_resource.rc
@@ -63,17 +58,11 @@ tags
 .DS_Store
 .directory
 *.debug
-Makefile*
 *.prl
 *.app
-moc_*.cpp
-ui_*.h
-qrc_*.cpp
 Thumbs.db
 *.res
 *.rc
-/.qmake.cache
-/.qmake.stash
 
 # qtcreator generated files
 *.pro.user*
@@ -108,6 +97,6 @@ Thumbs.db
 
 # Binaries
 # --------
-*.dll
 *.exe
 
+/proCreator
