@@ -1,5 +1,7 @@
 #include "ProFileWriter.h"
-#include <QDebug>
+
+// Qt includes
+#include <QtCore/QDebug>
 
 ProFileWriter::ProFileWriter()
 {
