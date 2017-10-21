@@ -20,7 +20,7 @@ This is just a small helper for something you can do manually. But it is boring.
 - hand that data over to the ProFileWriter
 
 ################ current state of the output ##############
-
+```
 Starting ~/proCreator/proCreator...
 ##########################################################
 # pro-file created by proCreator                         #
@@ -44,3 +44,5 @@ HEADERS += \
 	file2 
 
 ~/proCreator/proCreator exited with code 0
+```
+
