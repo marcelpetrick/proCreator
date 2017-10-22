@@ -20,4 +20,9 @@ private:
 
     //! Used to create the header of the pro-file.
     void writeHeader(QString const targetName);
+
+    //! Parse the current (given?) directory for all pre-defined file-filters and return them in a nice map of QStringList
+    //! @param filter list of needed filetypes
+    //! @returns the list of files which fit to the filter
+    QStringList getFiles(QStringList filter);
 };

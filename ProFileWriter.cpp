@@ -1,11 +1,11 @@
 #include "ProFileWriter.h"
 
 // Qt includes
+#include <QtCore/QDir>
 #include <QtCore/QDebug>
 
 ProFileWriter::ProFileWriter()
 {
-    //qDebug() << "ctor ProFileWriter()"; //todom remove
 }
 
 //###############################################
@@ -19,10 +19,11 @@ void ProFileWriter::writeEverything(const QString targetName)
 
     //SOURCES
     {
-        QStringList exampleList;
-        exampleList << "file0.cpp"; // << "file1.h" << "file2";
+        // rewritten just for a short test - shall be improved
+        QStringList const filter({"*.cpp"});
+        QStringList const fileList = getFiles(filter);
         QString sectioName("SOURCES");
-        writeSection(sectioName, exampleList);
+        writeSection(sectioName, fileList);
     }
 
     //HEADERS
@@ -107,4 +108,18 @@ void ProFileWriter::writeHeader(const QString targetName)
     output.append(QString() + "TEMPLATE = app" + "\n");
 
     qDebug().noquote() << output;
+}
+
+//###############################################
+
+QStringList ProFileWriter::getFiles(QStringList filter)
+{
+    //qDebug() << "ProFileWriter::getFiles()"; //todom remove
+
+    QDir directory("."); //todo change this to the best directory
+
+    QStringList const fileNames = directory.entryList(filter, QDir::Files);
+    qDebug() << "fileNames:" << fileNames; //todom remove
+
+    return fileNames;
 }
