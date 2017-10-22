@@ -4,7 +4,15 @@
 #include <QtCore/QDir>
 #include <QtCore/QDebug>
 
-ProFileWriter::ProFileWriter()
+namespace
+{
+    QString cVersion = "0.1";
+}
+
+//###############################################
+
+ProFileWriter::ProFileWriter(QString pathToUse)
+    : m_pathToUse(pathToUse)
 {
 }
 
@@ -35,9 +43,7 @@ void ProFileWriter::writeEverything(const QString targetName)
 
 void ProFileWriter::writeSection(const QString sectionName, QStringList items)
 {
-    //qDebug() << "ProFileWriter::writeSection: sectionName=" << sectionName << " | items=" << items; //todom remove
-
-    //0. if the list it empty, then don't write the seection at all (TODO TBD - maybe as empty section)
+    //0. if the list it empty, then don't write the section at all (TODO TBD - maybe as empty section)
     //1. else: add items. Per item some tabs, then filename, then space, then backslash
     //2. last item get's no slash
 
@@ -74,12 +80,16 @@ void ProFileWriter::writeHeader(const QString targetName)
     QString output;
 
     output.append(QString() + "##########################################################" + "\n");
-    output.append(QString() + "# pro-file created by proCreator                         #" + "\n"); //TODO maybe add some date ... but, IDC
+    output.append(QString() + "# pro-file created by proCreator " + cVersion + "                     #" + "\n");
     output.append(QString() + "#   project: https://github.com/marcelpetrick/proCreator #" + "\n");
     output.append(QString() + "#   contact: mail@marcelpetrick.it                       #" + "\n");
     output.append(QString() + "##########################################################" + "\n");
     output.append("\n");
     output.append(QString() + "QT += core gui" + "\n");
+    output.append("\n");
+    output.append(QString() + "CONFIG += c++11" + "\n");
+    output.append("\n");
+    output.append(QString() + "DEFINES += QT_DEPRECATED_WARNINGS" + "\n");
     output.append("\n");
     output.append(QString() + "greaterThan(QT_MAJOR_VERSION, 4): QT += widgets" + "\n");
     output.append("\n");
@@ -93,9 +103,7 @@ void ProFileWriter::writeHeader(const QString targetName)
 
 QStringList ProFileWriter::getFiles(QStringList filter)
 {
-    //qDebug() << "ProFileWriter::getFiles()"; //todom remove
-
-    QDir directory("."); //todo change this to the best directory
+    QDir directory(m_pathToUse); //todo change this to the best directory
 
     QStringList const fileNames = directory.entryList(filter, QDir::Files);
     //qDebug() << "fileNames:" << fileNames; //todom remove
