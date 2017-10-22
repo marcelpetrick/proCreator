@@ -18,37 +18,16 @@ void ProFileWriter::writeEverything(const QString targetName)
     writeHeader(targetName);
 
     //SOURCES
-    {
-        // rewritten just for a short test - shall be improved
-        QStringList const filter({"*.cpp"});
-        QStringList const fileList = getFiles(filter);
-        QString sectioName("SOURCES");
-        writeSection(sectioName, fileList);
-    }
+    writeSection(QString("SOURCES"), getFiles(QStringList({"*.cpp"})));
 
     //HEADERS
-    {
-        QStringList exampleList;
-        exampleList << "file0.h" << "file1.h" << "file2";
-        QString sectioName("HEADERS");
-        writeSection(sectioName, exampleList);
-    }
+    writeSection(QString("HEADERS"), getFiles(QStringList({"*.h", "*.hpp"})));
 
     //FORMS
-    {
-        QStringList exampleList;
-        //exampleList << "file0" << "file1" << "file2";
-        QString sectioName("FORMS");
-        writeSection(sectioName, exampleList);
-    }
+    writeSection(QString("FORMS"), getFiles(QStringList({"*.ui"})));
 
     //RESOURCES
-    {
-        QStringList exampleList;
-        //exampleList << "file0" << "file1" << "file2";
-        QString sectioName("RESOURCES");
-        writeSection(sectioName, exampleList);
-    }
+    writeSection(QString("RESOURCES"), getFiles(QStringList({"*.qrc"})));
 }
 
 //###############################################
@@ -58,7 +37,7 @@ void ProFileWriter::writeSection(const QString sectionName, QStringList items)
 {
     //qDebug() << "ProFileWriter::writeSection: sectionName=" << sectionName << " | items=" << items; //todom remove
 
-    //0. if the list it empty, then don't write the seection at all (TODO TBD - mayb as empty section)
+    //0. if the list it empty, then don't write the seection at all (TODO TBD - maybe as empty section)
     //1. else: add items. Per item some tabs, then filename, then space, then backslash
     //2. last item get's no slash
 
@@ -66,7 +45,7 @@ void ProFileWriter::writeSection(const QString sectionName, QStringList items)
     if(items.isEmpty())
     {
         //qDebug() << "\t" << "empty list - early return";
-        return;
+        return; //! @attention  comment this if empty sections shall still appear
     }
 
     QString output;
@@ -119,7 +98,7 @@ QStringList ProFileWriter::getFiles(QStringList filter)
     QDir directory("."); //todo change this to the best directory
 
     QStringList const fileNames = directory.entryList(filter, QDir::Files);
-    qDebug() << "fileNames:" << fileNames; //todom remove
+    //qDebug() << "fileNames:" << fileNames; //todom remove
 
     return fileNames;
 }
